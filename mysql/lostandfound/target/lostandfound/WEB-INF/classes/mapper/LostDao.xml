@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lostandfound.dao.LostDao">
+    <resultMap type="org.lostandfound.entity.Found" id="FoundModel">
+        <id property="foundid" column="foundid"/>
+        <result property="foundname" column="foundname"/>
+        <result property="classes" column="classes"/>
+        <result property="foundthings" column="foundthings"/>
+        <result property="founddate" column="founddate"/>
+        <result property="foundplace" column="foundplace"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+    <!--<resultMap type="org.lostandfound.entity.Lost" id="LostModel">-->
+        <!--<id property="lostid" column="lostid"/>-->
+        <!--<result property="lostname" column="lostname"/>-->
+        <!--<result property="lostthings" column="lostthings"/>-->
+        <!--<result property="lostdate" column="lostdate"/>-->
+        <!--<result property="lostplace" column="lostplace"/>-->
+        <!--<result property="phone" column="phone"/>-->
+    <!--</resultMap>-->
+
+
+    <select id="queryByLostthings" resultType="Found" resultMap="FoundModel">
+        select *
+        from found
+        where foundthings like CONCAT(CONCAT('%',#{lostthings}),'%')
+    </select>
+
+    <insert id="insertLost" useGeneratedKeys="true" keyProperty="lostid" parameterType="Lost">
+    <!--<insert id="insertLost" parameterType="Lost">-->
+        <!--<selectKey keyProperty="lostid" order="BEFORE" resultType="java.lang.Integer" >-->
+            <!--SELECT LAST_INSERT_ID()-->
+        <!--</selectKey>-->
+        insert into lost (lostname,classes,lostthings,lostdate,lostplace,phone)
+        VALUES (#{lostname},#{classes},#{lostthings},#{lostdate},#{lostplace},#{phone})
+    </insert>
+
+</mapper>

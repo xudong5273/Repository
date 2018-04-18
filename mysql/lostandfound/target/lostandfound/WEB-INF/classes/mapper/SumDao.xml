@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lostandfound.dao.SumDao">
+    <resultMap type="org.lostandfound.entity.Found" id="FoundModel">
+        <id property="foundid" column="foundid"/>
+        <result property="foundname" column="foundname"/>
+        <result property="classes" column="classes"/>
+        <result property="foundthings" column="foundthings"/>
+        <result property="founddate" column="founddate"/>
+        <result property="foundplace" column="foundplace"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+    <resultMap type="org.lostandfound.entity.Lost" id="LostModel">
+    <id property="lostid" column="lostid"/>
+    <result property="lostname" column="lostname"/>
+        <result property="classes" column="classes"/>
+    <result property="lostthings" column="lostthings"/>
+    <result property="lostdate" column="lostdate"/>
+    <result property="lostplace" column="lostplace"/>
+    <result property="phone" column="phone"/>
+    </resultMap>
+
+    <select id="queryLost" resultType="Lost">
+          SELECT *
+          from lost
+    </select>
+
+    <select id="queryFound" resultType="Found">
+        SELECT *
+        from found
+    </select>
+
+</mapper>

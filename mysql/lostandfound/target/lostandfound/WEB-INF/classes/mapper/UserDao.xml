@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lostandfound.dao.UserDao">
+    <resultMap id="UserModel" type="org.lostandfound.entity.User">
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="classes" column="classes"/>
+    </resultMap>
+    <select id="queryAll" resultType="User">
+      SELECT *
+      from user
+    </select>
+
+    <select id="queryByUsername" resultType="User">
+        SELECT *
+        from user
+        where username=#{username}
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        insert into user (username, password, classes)values(
+       #{username},#{password},#{classes}
+        )
+    </insert>
+
+    <update id="updateUser">
+        update user
+        set password=#{param2},classes=#{param3}
+        where username=#{param1}
+    </update>
+</mapper>
